@@ -1,0 +1,3 @@
+export const USER_CAD_REQUEST = 'USER_CAD_REQUEST'
+export const USER_CAD_SUCCESS = 'USER_CAD_SUCCESS'
+export const USER_CAD_FAIL = 'USER_CAD_FAIL'
