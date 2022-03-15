@@ -49,6 +49,61 @@ export const info = (nome, rg, cpf, dataNascimento, dataAdmissao, funcao) => asy
   }
 }
 
+export const edit = (editarNome, editID) => async (dispatch) => {
+  // rg, cpf, dataNascimento, dataAdmissao, funcao
+  try {
+    dispatch({
+      type: USER_CAD_REQUEST,
+    })
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+    }
+    // console.log('eNVIAR O ID POR PARAMETRO');
+    const { data } = await axios.put(
+      `http://127.0.0.1:5000/api/edit/`,
+      {
+        editarNome,
+        // rg,
+        // cpf,
+        // dataNascimento,
+        // dataAdmissao,
+        // funcao
+      },
+      config
+    )
+
+    dispatch({
+      type: USER_CAD_SUCCESS,
+      payload: data,
+    })
+
+  } catch (error) {
+    dispatch({
+      type: USER_CAD_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //readPeassoa
 // export const getUserDetails = (id) => async (dispatch, getState) => {

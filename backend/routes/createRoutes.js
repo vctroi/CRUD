@@ -5,12 +5,13 @@ import {
   getPessoas,
   createPeassoa,
   deleteUser,
-  // updatePessoa,
+  editPessoas
 } from '../controllers/userController.js'
 
 
 router.route('/create').post(createPeassoa)
 router.route('/read').get(getPessoas)
+router.route('/edit').put(editPessoas)
 router.route('/delete/:id').delete(deleteUser)
 
 //   .put(protect, admin, updatePessoa)

@@ -1,52 +1,54 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { Badge, Button, Container, ListGroup, Form, Row, Col, InputGroup, FormControl } from 'react-bootstrap'
+import { Badge, Button, Container, ListGroup, Form, Row, Col } from 'react-bootstrap'
+// InputGroup, FormControl
 import FormContainer from './components/FormContainer'
 import { useDispatch } from 'react-redux'
-import { info } from './actions/userActions'
+import { edit, info } from './actions/userActions'
 import axios from 'axios'
 
-export const Update = () => {
+// export const Update = () => {
 
-  const submitHandler = (e) => {
-    const [editeNome, setEditNome] = useState('')
-    const [rg, setRg] = useState('')
-    const [cpf, setCpf] = useState('')
-    const [dataNascimento, setDataNascimento] = useState('')
-    const [dataAdmissao, setDataAdmissao] = useState('')
-    const [funcao, setFuncao] = useState('')
+//   const submitHandler = (e) => {
+//     const [editeNome, setEditNome] = useState('')
+//     const [rg, setRg] = useState('')
+//     const [cpf, setCpf] = useState('')
+//     const [dataNascimento, setDataNascimento] = useState('')
+//     const [dataAdmissao, setDataAdmissao] = useState('')
+//     const [funcao, setFuncao] = useState('')
 
-    dispatch(info({
-      editeNome,
-      rg,
-      cpf,
-      dataNascimento,
-      dataAdmissao,
-      funcao
-    }))
-  }
+//     dispatch(info({
+//       editeNome,
+//       rg,
+//       cpf,
+//       dataNascimento,
+//       dataAdmissao,
+//       funcao
+//     }))
+//   }
 
-  return (
-    // 
-    <Form onSubmit={submitHandler} >
-      <Form.Group controlId='nome'>
-        <Form.Control
-          type='text'
-          placeholder='Digite um valor no campo'
-          onChange={(e) => setEditNome(e.target.value)}
-        ></Form.Control>
-        <Button type='submit' variant='warning'>
-          Editar
-        </Button>
-      </Form.Group>
-    </Form>
+// return (
+//   // 
+//   <Form onSubmit={submitHandler} >
+//     <Form.Group controlId='nome'>
+//       <Form.Control
+//         type='text'
+//         placeholder='Digite um valor no campo'
+//         onChange={(e) => setEditNome(e.target.value)}
+//       ></Form.Control>
+//       <Button type='submit' variant='warning'>
+//         Editar
+//       </Button>
+//     </Form.Group>
+//   </Form>
 
-  );
-};
+// );
+// };
 
 
 const App = () => {
   const [nome, setNome] = useState('')
+  const [editarNome, setEditNome] = useState('')
   const [rg, setRg] = useState('')
   const [cpf, setCpf] = useState('')
   const [dataNascimento, setDataNascimento] = useState('')
@@ -65,6 +67,20 @@ const App = () => {
       dataNascimento,
       dataAdmissao,
       funcao
+    }))
+  }
+
+  const submitEditHandler = (e) => {
+    e.preventDefault()
+    // console.log("Editar", editarNome);
+    dispatch(edit({
+      id: "622e1362606f03cde0751920",
+      editarNome,
+      // rg,
+      // cpf,
+      // dataNascimento,
+      // dataAdmissao,
+      // funcao
     }))
   }
 
@@ -136,7 +152,6 @@ const App = () => {
                   onChange={(e) => setFuncao(e.target.value)}
                 ></Form.Control>
               </Form.Group>
-
               <Button type='submit' variant='primary'>
                 Adicionar
               </Button>
@@ -149,12 +164,28 @@ const App = () => {
                     <ListGroup.Item>
                       <span style={{ fontWeight: "bold", color: "black", marginRight: "20px", fontSize: "20px" }}>Nome: </span>{element.nome}
                     </ListGroup.Item>
-                    <Update />
+
+                    <Form onSubmit={submitEditHandler}>
+                      <FormContainer>
+                        <Form.Group controlId='nome'>
+                          <Form.Label>Editar nome:</Form.Label>
+                          <Form.Control
+                            type='text'
+                            placeholder='Editar'
+                            onChange={(e) => setEditNome(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </FormContainer>
+                      <Button type='submit' variant='warning'>
+                        Editar
+                      </Button>
+                    </Form>
+
 
                     <ListGroup.Item>
                       <span style={{ fontWeight: "bold", color: "black", marginRight: "20px", fontSize: "20px" }}>Rg: </span>{element.rg}
                     </ListGroup.Item>
-                    <Update />
+                    {/* <Update /> */}
                     <ListGroup.Item>
                       <span style={{ fontWeight: "bold", color: "black", marginRight: "20px", fontSize: "20px" }}>Cpf: </span>{element.cpf}
                     </ListGroup.Item>
